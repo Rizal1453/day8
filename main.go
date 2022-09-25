@@ -113,19 +113,15 @@ func AddProject(w http.ResponseWriter,r *http.Request){
 	var duration string
 	
 
-	if years > 0{
-		duration = strconv.FormatFloat(years,'f',0,64) + "years"
-	}else if months > 0 {
-		duration = strconv.FormatFloat(months, 'f', 0, 64) + " Months"
-	}else if weeks > 0 {
-		duration = strconv.FormatFloat(weeks,'f',0,64) + "weeks"
-	} else if days > 0 {
-		duration = strconv.FormatFloat(days, 'f', 0, 64) + " Days"
-	} else if hours > 0 {
-		duration = strconv.FormatFloat(hours, 'f', 0, 64) + " Hours"
-	} else {
-		duration = "0 Days"
-	}
+	if days >= 1 && days <= 6 {
+		duration = strconv.Itoa(int(days)) + " days"
+	  } else if days >= 7 && days <= 29 {
+		duration = strconv.Itoa(int(weeks)) + " weeks"
+	  } else if days >= 30 && days <= 364 {
+		duration = strconv.Itoa(int(months)) + " months"
+	  } else if days >= 365 {
+		duration = strconv.Itoa(int(years)) + " years"
+	  }
 
 
 	var newProject = Struct{
